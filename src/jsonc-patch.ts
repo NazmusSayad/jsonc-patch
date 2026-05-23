@@ -65,7 +65,6 @@ export function jsoncPatch<T extends object>(
   const sortedPatch = [...patch].sort((a, b) => {
     if (a.op === 'remove' && b.op !== 'remove') return -1
     if (a.op !== 'remove' && b.op === 'remove') return 1
-
     return b.path.localeCompare(a.path)
   })
 
@@ -75,13 +74,11 @@ export function jsoncPatch<T extends object>(
     }
 
     const targetPath = op.path.split('/').slice(1)
+    const targetValue = op.op === 'remove' ? undefined : op.value
 
-    const edits = modify(
-      inputText,
-      targetPath,
-      op.op === 'remove' ? undefined : op.value,
-      { ...options }
-    )
+    const edits = modify(inputText, targetPath, targetValue, {
+      ...options,
+    })
 
     inputText = applyEdits(inputText, edits)
   }
