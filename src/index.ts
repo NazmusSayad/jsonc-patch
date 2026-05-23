@@ -9,9 +9,16 @@ export function jsoncPatch<T extends object>(
   const prevObject = parse(text) as T
   const patch = compare(prevObject, object)
 
+  const sortedPatch = [...patch].sort((a, b) => {
+    if (a.op === 'remove' && b.op !== 'remove') return -1
+    if (a.op !== 'remove' && b.op === 'remove') return 1
+
+    return b.path.localeCompare(a.path)
+  })
+
   let inputText = text
 
-  for (const op of patch) {
+  for (const op of sortedPatch) {
     if (op.op !== 'add' && op.op !== 'replace' && op.op !== 'remove') {
       continue
     }
@@ -25,7 +32,7 @@ export function jsoncPatch<T extends object>(
       inputText,
       path,
       op.op === 'remove' ? undefined : op.value,
-      options ?? {}
+      { ...options }
     )
 
     inputText = applyEdits(inputText, edits)
