@@ -1,5 +1,6 @@
 import { compare } from 'fast-json-patch'
 import { applyEdits, ModificationOptions, modify, parse } from 'jsonc-parser'
+import { toJsonPath } from './json-path'
 
 /**
  * Applies object changes to a JSONC string while preserving formatting, comments,
@@ -73,7 +74,11 @@ export function jsoncPatch<T extends object>(
       continue
     }
 
-    const targetPath = op.path.split('/').slice(1)
+    const targetPath = toJsonPath(
+      prevObject,
+      object,
+      op.path.split('/').slice(1)
+    )
     const targetValue = op.op === 'remove' ? undefined : op.value
 
     const edits = modify(inputText, targetPath, targetValue, {
