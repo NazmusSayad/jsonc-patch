@@ -40,3 +40,5 @@ export function jsoncPatch<T extends object>(
 
   return inputText
 }
+
+export default jsoncPatch

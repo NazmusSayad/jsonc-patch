@@ -1,6 +1,6 @@
 {
   "name": "jsonc-patch",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "sideEffects": false,
   "scripts": {
     "lint": "eslint .",
