@@ -74,14 +74,11 @@ export function jsoncPatch<T extends object>(
       continue
     }
 
-    const path = op.path
-      .split('/')
-      .slice(1)
-      .map((segment) => (/^\d+$/.test(segment) ? Number(segment) : segment))
+    const targetPath = op.path.split('/').slice(1)
 
     const edits = modify(
       inputText,
-      path,
+      targetPath,
       op.op === 'remove' ? undefined : op.value,
       { ...options }
     )
