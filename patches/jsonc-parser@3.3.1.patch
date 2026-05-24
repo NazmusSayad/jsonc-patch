@@ -1,0 +1,14 @@
+diff --git a/lib/umd/impl/edit.js b/lib/umd/impl/edit.js
+index f9aeefef667d8a725dba6954d5831bdc5ff145f8..4470ffb9103f58b72b8b2e10e7dd6ba7e877a357 100644
+--- a/lib/umd/impl/edit.js
++++ b/lib/umd/impl/edit.js
+@@ -126,8 +126,7 @@
+                     // last item
+                     let previous = parent.children[removalIndex - 1];
+                     let offset = previous.offset + previous.length;
+-                    let parentEndOffset = parent.offset + parent.length;
+-                    edit = { offset, length: parentEndOffset - 2 - offset, content: '' };
++                    edit = { offset, length: toRemove.offset + toRemove.length - offset, content: '' };
+                 }
+                 else {
+                     edit = { offset: toRemove.offset, length: parent.children[removalIndex + 1].offset - toRemove.offset, content: '' };

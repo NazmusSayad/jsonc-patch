@@ -503,7 +503,7 @@ describe('add to existing objects', () => {
   })
   it('add two to existing', () => {
     expect(jsoncPatch('{"a": 1}', { a: 1, b: 2, c: 3 })).toBe(
-      '{"a": 1,"c": 3,"b": 2}'
+      '{"a": 1,"b": 2,"c": 3}'
     )
   })
   it('add to compact', () => {
@@ -570,14 +570,14 @@ describe('toggle extremes', () => {
     expect(jsoncPatch('{"a": 1}', {})).toBe('{}')
   })
   it('empty to two', () => {
-    expect(jsoncPatch('{}', { a: 1, b: 2 })).toBe('{"b": 2,"a": 1}')
+    expect(jsoncPatch('{}', { a: 1, b: 2 })).toBe('{"a": 1,"b": 2}')
   })
   it('two to empty', () => {
     expect(jsoncPatch('{"a": 1, "b": 2}', {})).toBe('{}')
   })
   it('empty to three', () => {
     expect(jsoncPatch('{}', { a: 1, b: 2, c: 3 })).toBe(
-      '{"c": 3,"b": 2,"a": 1}'
+      '{"a": 1,"b": 2,"c": 3}'
     )
   })
   it('three to empty', () => {
@@ -617,7 +617,7 @@ describe('toggle extremes', () => {
   })
   it('one to four', () => {
     expect(jsoncPatch('{"a":1}', { a: 1, b: 2, c: 3, d: 4 })).toBe(
-      '{"a":1,"d": 4,"c": 3,"b": 2}'
+      '{"a":1,"b": 2,"c": 3,"d": 4}'
     )
   })
 })

@@ -10,7 +10,7 @@ describe('add property', () => {
   })
   it('add multiple properties', () => {
     expect(jsoncPatch('{"a": 1}', { a: 1, b: 2, c: 3, d: 4 })).toBe(
-      '{"a": 1,"d": 4,"c": 3,"b": 2}'
+      '{"a": 1,"b": 2,"c": 3,"d": 4}'
     )
   })
   it('add to non-empty object', () => {
@@ -197,7 +197,7 @@ describe('object toggling', () => {
   })
   it('toggle single to three', () => {
     expect(jsoncPatch('{"a": 1}', { a: 1, b: 2, c: 3 })).toBe(
-      '{"a": 1,"c": 3,"b": 2}'
+      '{"a": 1,"b": 2,"c": 3}'
     )
   })
   it('toggle three to single', () => {
@@ -313,7 +313,7 @@ describe('empty and minimal', () => {
   })
   it('single to many', () => {
     expect(jsoncPatch('{"a":1}', { a: 1, b: 2, c: 3, d: 4, e: 5 })).toBe(
-      '{"a":1,"e": 5,"d": 4,"c": 3,"b": 2}'
+      '{"a":1,"b": 2,"c": 3,"d": 4,"e": 5}'
     )
   })
 })

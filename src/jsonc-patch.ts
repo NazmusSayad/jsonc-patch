@@ -67,7 +67,10 @@ export function jsoncPatch<T extends object>(
   const sortedPatch = [...patch].sort((a, b) => {
     if (a.op === 'remove' && b.op !== 'remove') return -1
     if (a.op !== 'remove' && b.op === 'remove') return 1
-    return b.path.localeCompare(a.path)
+    if (a.op === 'remove') {
+      return b.path.localeCompare(a.path)
+    }
+    return a.path.localeCompare(b.path)
   })
 
   for (const op of sortedPatch) {

@@ -150,7 +150,7 @@ describe('add property - all value types', () => {
   })
   it('add multiple keys at once to empty', () => {
     expect(jsoncPatch('{}', { a: 1, b: 2, c: 3 })).toBe(
-      '{"c": 3,"b": 2,"a": 1}'
+      '{"a": 1,"b": 2,"c": 3}'
     )
   })
   it('add to object with trailing comma', () => {
@@ -372,11 +372,11 @@ describe('mixed operations - add, replace, remove', () => {
   it('add replace and remove complex', () => {
     expect(
       jsoncPatch('{"a": 1, "b": 2, "c": 3}', { a: 10, c: 30, d: 4, e: 5 })
-    ).toBe('{"a": 10, "c": 30,"e": 5,"d": 4}')
+    ).toBe('{"a": 10, "c": 30,"d": 4,"e": 5}')
   })
   it('add two remove one replace one', () => {
     expect(jsoncPatch('{"x": 1, "y": 2, "z": 3}', { y: 99, w: 4, v: 5 })).toBe(
-      '{"y": 99,"w": 4,"v": 5}'
+      '{"y": 99,"v": 5,"w": 4}'
     )
   })
   it('add remove same key pattern', () => {
@@ -1148,14 +1148,14 @@ describe('object toggling extremes', () => {
     expect(jsoncPatch('{"a": 1}', {})).toBe('{}')
   })
   it('empty to two', () => {
-    expect(jsoncPatch('{}', { a: 1, b: 2 })).toBe('{"b": 2,"a": 1}')
+    expect(jsoncPatch('{}', { a: 1, b: 2 })).toBe('{"a": 1,"b": 2}')
   })
   it('two to empty', () => {
     expect(jsoncPatch('{"a": 1, "b": 2}', {})).toBe('{}')
   })
   it('empty to three', () => {
     expect(jsoncPatch('{}', { a: 1, b: 2, c: 3 })).toBe(
-      '{"c": 3,"b": 2,"a": 1}'
+      '{"a": 1,"b": 2,"c": 3}'
     )
   })
   it('three to empty', () => {
@@ -1195,7 +1195,7 @@ describe('object toggling extremes', () => {
   })
   it('one to four', () => {
     expect(jsoncPatch('{"a":1}', { a: 1, b: 2, c: 3, d: 4 })).toBe(
-      '{"a":1,"d": 4,"c": 3,"b": 2}'
+      '{"a":1,"b": 2,"c": 3,"d": 4}'
     )
   })
 })
@@ -1300,7 +1300,7 @@ describe('array type mutations', () => {
   it('array of arrays different lengths', () => {
     expect(
       jsoncPatch('{"arr": [[1, 2], [3, 4]]}', { arr: [[1], [3, 4, 5]] })
-    ).toBe('{"arr": [[1], [3,4,5]]}')
+    ).toBe('{"arr": [[1], [3, 4,5]]}')
   })
   it('array with null element', () => {
     expect(
@@ -1496,7 +1496,7 @@ describe('multiple operations on same level', () => {
   })
   it('add two to existing', () => {
     expect(jsoncPatch('{"a": 1}', { a: 1, b: 2, c: 3 })).toBe(
-      '{"a": 1,"c": 3,"b": 2}'
+      '{"a": 1,"b": 2,"c": 3}'
     )
   })
   it('remove two from five', () => {
@@ -1507,7 +1507,7 @@ describe('multiple operations on same level', () => {
   it('add three to three', () => {
     expect(
       jsoncPatch('{"a":1,"b":2,"c":3}', { a: 1, b: 2, c: 3, d: 4, e: 5, f: 6 })
-    ).toBe('{"a":1,"b":2,"c":3,"f": 6,"e": 5,"d": 4}')
+    ).toBe('{"a":1,"b":2,"c":3,"d": 4,"e": 5,"f": 6}')
   })
   it('remove three from five', () => {
     expect(jsoncPatch('{"a":1,"b":2,"c":3,"d":4,"e":5}', { d: 4, e: 5 })).toBe(
@@ -1529,7 +1529,7 @@ describe('multiple operations on same level', () => {
     expect(jsoncPatch('{"a":1,"b":2,"c":3}', { d: 4 })).toBe('{"d": 4}')
   })
   it('remove all and add two', () => {
-    expect(jsoncPatch('{"a":1,"b":2}', { c: 3, d: 4 })).toBe('{"d": 4,"c": 3}')
+    expect(jsoncPatch('{"a":1,"b":2}', { c: 3, d: 4 })).toBe('{"c": 3,"d": 4}')
   })
   it('replace all keys new values', () => {
     expect(jsoncPatch('{"a":1,"b":2}', { a: 99, b: 99 })).toBe(
@@ -1539,7 +1539,7 @@ describe('multiple operations on same level', () => {
   it('add two remove two', () => {
     expect(
       jsoncPatch('{"a": 1, "b": 2, "c": 3, "d": 4}', { c: 3, e: 5, f: 6 })
-    ).toBe('{"c": 3,"f": 6,"e": 5}')
+    ).toBe('{"c": 3,"e": 5,"f": 6}')
   })
 })
 
@@ -1652,7 +1652,7 @@ describe('formatting options effect', () => {
   })
   it('add to trailing comma object', () => {
     expect(jsoncPatch('{"a": 1,}', { a: 1, b: 2, c: 3 })).toBe(
-      '{"a": 1,"c": 3,"b": 2,}'
+      '{"a": 1,"b": 2,"c": 3,}'
     )
   })
 })
@@ -1756,7 +1756,7 @@ describe('edge case - target smaller than source', () => {
         j: 10,
       })
     ).toBe(
-      '{"a":1,"j": 10,"i": 9,"h": 8,"g": 7,"f": 6,"e": 5,"d": 4,"c": 3,"b": 2}'
+      '{"a":1,"b": 2,"c": 3,"d": 4,"e": 5,"f": 6,"g": 7,"h": 8,"i": 9,"j": 10}'
     )
   })
   it('grow from 2 keys to 8', () => {
@@ -1771,7 +1771,7 @@ describe('edge case - target smaller than source', () => {
         g: 7,
         h: 8,
       })
-    ).toBe('{"a":1,"b":2,"h": 8,"g": 7,"f": 6,"e": 5,"d": 4,"c": 3}')
+    ).toBe('{"a":1,"b":2,"c": 3,"d": 4,"e": 5,"f": 6,"g": 7,"h": 8}')
   })
 })
 

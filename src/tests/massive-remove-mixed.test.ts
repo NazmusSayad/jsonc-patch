@@ -291,23 +291,23 @@ describe('add + replace mixed', () => {
   })
   it('add bc replace a', () => {
     expect(jsoncPatch('{"a": 1}', { a: 99, b: 2, c: 3 })).toBe(
-      '{"a": 99,"c": 3,"b": 2}'
+      '{"a": 99,"b": 2,"c": 3}'
     )
   })
   it('add two replace one', () => {
     expect(jsoncPatch('{"x": 1}', { x: 99, y: 2, z: 3 })).toBe(
-      '{"x": 99,"z": 3,"y": 2}'
+      '{"x": 99,"y": 2,"z": 3}'
     )
   })
   it('add three replace one', () => {
     expect(jsoncPatch('{"p": 1}', { p: 99, q: 2, r: 3, s: 4 })).toBe(
-      '{"p": 99,"s": 4,"r": 3,"q": 2}'
+      '{"p": 99,"q": 2,"r": 3,"s": 4}'
     )
   })
   it('add de replace ab', () => {
     expect(
       jsoncPatch('{"a":1,"b":2,"c":3}', { a: 99, b: 99, c: 3, d: 4, e: 5 })
-    ).toBe('{"a":99,"b":99,"c":3,"e": 5,"d": 4}')
+    ).toBe('{"a":99,"b":99,"c":3,"d": 4,"e": 5}')
   })
 })
 
@@ -339,12 +339,12 @@ describe('add + remove mixed', () => {
   })
   it('add de remove ab', () => {
     expect(jsoncPatch('{"a": 1, "b": 2, "c": 3}', { c: 3, d: 4, e: 5 })).toBe(
-      '{"c": 3,"e": 5,"d": 4}'
+      '{"c": 3,"d": 4,"e": 5}'
     )
   })
   it('add two remove one', () => {
     expect(jsoncPatch('{"a": 1, "b": 2, "c": 3}', { b: 2, d: 4, e: 5 })).toBe(
-      '{"b": 2,"e": 5,"d": 4}'
+      '{"b": 2,"d": 4,"e": 5}'
     )
   })
   it('add one remove two', () => {
@@ -360,7 +360,7 @@ describe('add + remove mixed', () => {
         h: 8,
         i: 9,
       })
-    ).toBe('{"d":4,"e":5,"f":6,"i": 9,"h": 8,"g": 7}')
+    ).toBe('{"d":4,"e":5,"f":6,"g": 7,"h": 8,"i": 9}')
   })
 })
 
@@ -430,13 +430,13 @@ describe('add replace remove all three', () => {
   })
   it('add de replace a remove bc', () => {
     expect(jsoncPatch('{"a": 1, "b": 2, "c": 3}', { a: 99, d: 4, e: 5 })).toBe(
-      '{"a": 99,"e": 5,"d": 4}'
+      '{"a": 99,"d": 4,"e": 5}'
     )
   })
   it('add ef replace ab remove cd', () => {
     expect(
       jsoncPatch('{"a":1,"b":2,"c":3,"d":4}', { a: 99, b: 99, e: 5, f: 6 })
-    ).toBe('{"a":99,"b":99,"f": 6,"e": 5}')
+    ).toBe('{"a":99,"b":99,"e": 5,"f": 6}')
   })
   it('add three replace two remove two', () => {
     expect(
@@ -447,7 +447,7 @@ describe('add replace remove all three', () => {
         g: 7,
         h: 8,
       })
-    ).toBe('{"a":99,"d":99,"h": 8,"g": 7,"f": 6}')
+    ).toBe('{"a":99,"d":99,"f": 6,"g": 7,"h": 8}')
   })
   it('complex wxyz', () => {
     expect(
@@ -457,16 +457,16 @@ describe('add replace remove all three', () => {
         a: 10,
         b: 20,
       })
-    ).toBe('{"x": 99, "y": 99,"b": 20,"a": 10}')
+    ).toBe('{"x": 99, "y": 99,"a": 10,"b": 20}')
   })
   it('full replacement of all keys', () => {
     expect(jsoncPatch('{"old1": 1, "old2": 2}', { new1: 3, new2: 4 })).toBe(
-      '{"new2": 4,"new1": 3}'
+      '{"new1": 3,"new2": 4}'
     )
   })
   it('full replacement three new', () => {
     expect(jsoncPatch('{"x":1,"y":2,"z":3}', { a: 10, b: 20, c: 30 })).toBe(
-      '{"c": 30,"b": 20,"a": 10}'
+      '{"a": 10,"b": 20,"c": 30}'
     )
   })
 })
@@ -476,42 +476,42 @@ describe('add N properties to empty', () => {
     expect(jsoncPatch('{}', { a: 1 })).toBe('{"a": 1}')
   })
   it('add 2 props', () => {
-    expect(jsoncPatch('{}', { a: 1, b: 2 })).toBe('{"b": 2,"a": 1}')
+    expect(jsoncPatch('{}', { a: 1, b: 2 })).toBe('{"a": 1,"b": 2}')
   })
   it('add 3 props', () => {
     expect(jsoncPatch('{}', { a: 1, b: 2, c: 3 })).toBe(
-      '{"c": 3,"b": 2,"a": 1}'
+      '{"a": 1,"b": 2,"c": 3}'
     )
   })
   it('add 4 props', () => {
     expect(jsoncPatch('{}', { a: 1, b: 2, c: 3, d: 4 })).toBe(
-      '{"d": 4,"c": 3,"b": 2,"a": 1}'
+      '{"a": 1,"b": 2,"c": 3,"d": 4}'
     )
   })
   it('add 5 props', () => {
     expect(jsoncPatch('{}', { a: 1, b: 2, c: 3, d: 4, e: 5 })).toBe(
-      '{"e": 5,"d": 4,"c": 3,"b": 2,"a": 1}'
+      '{"a": 1,"b": 2,"c": 3,"d": 4,"e": 5}'
     )
   })
   it('add 6 props', () => {
     expect(jsoncPatch('{}', { a: 1, b: 2, c: 3, d: 4, e: 5, f: 6 })).toBe(
-      '{"f": 6,"e": 5,"d": 4,"c": 3,"b": 2,"a": 1}'
+      '{"a": 1,"b": 2,"c": 3,"d": 4,"e": 5,"f": 6}'
     )
   })
   it('add 7 props', () => {
     expect(jsoncPatch('{}', { a: 1, b: 2, c: 3, d: 4, e: 5, f: 6, g: 7 })).toBe(
-      '{"g": 7,"f": 6,"e": 5,"d": 4,"c": 3,"b": 2,"a": 1}'
+      '{"a": 1,"b": 2,"c": 3,"d": 4,"e": 5,"f": 6,"g": 7}'
     )
   })
   it('add 8 props', () => {
     expect(
       jsoncPatch('{}', { a: 1, b: 2, c: 3, d: 4, e: 5, f: 6, g: 7, h: 8 })
-    ).toBe('{"h": 8,"g": 7,"f": 6,"e": 5,"d": 4,"c": 3,"b": 2,"a": 1}')
+    ).toBe('{"a": 1,"b": 2,"c": 3,"d": 4,"e": 5,"f": 6,"g": 7,"h": 8}')
   })
   it('add 9 props', () => {
     expect(
       jsoncPatch('{}', { a: 1, b: 2, c: 3, d: 4, e: 5, f: 6, g: 7, h: 8, i: 9 })
-    ).toBe('{"i": 9,"h": 8,"g": 7,"f": 6,"e": 5,"d": 4,"c": 3,"b": 2,"a": 1}')
+    ).toBe('{"a": 1,"b": 2,"c": 3,"d": 4,"e": 5,"f": 6,"g": 7,"h": 8,"i": 9}')
   })
   it('add 10 props', () => {
     expect(
@@ -528,7 +528,7 @@ describe('add N properties to empty', () => {
         j: 10,
       })
     ).toBe(
-      '{"j": 10,"i": 9,"h": 8,"g": 7,"f": 6,"e": 5,"d": 4,"c": 3,"b": 2,"a": 1}'
+      '{"a": 1,"b": 2,"c": 3,"d": 4,"e": 5,"f": 6,"g": 7,"h": 8,"i": 9,"j": 10}'
     )
   })
 })
