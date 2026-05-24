@@ -9,10 +9,14 @@ describe('add property', () => {
     expect(jsoncPatch('{"a": 1}', { a: 1, b: 2 })).toBe('{"a": 1,"b": 2}')
   })
   it('add multiple properties', () => {
-    expect(jsoncPatch('{"a": 1}', { a: 1, b: 2, c: 3, d: 4 })).toBe('{"a": 1,"d": 4,"c": 3,"b": 2}')
+    expect(jsoncPatch('{"a": 1}', { a: 1, b: 2, c: 3, d: 4 })).toBe(
+      '{"a": 1,"d": 4,"c": 3,"b": 2}'
+    )
   })
   it('add to non-empty object', () => {
-    expect(jsoncPatch('{"x": 10, "y": 20}', { x: 10, y: 20, z: 30 })).toBe('{"x": 10, "y": 20,"z": 30}')
+    expect(jsoncPatch('{"x": 10, "y": 20}', { x: 10, y: 20, z: 30 })).toBe(
+      '{"x": 10, "y": 20,"z": 30}'
+    )
   })
   it('add string value', () => {
     expect(jsoncPatch('{}', { name: 'test' })).toBe('{"name": "test"}')
@@ -39,16 +43,22 @@ describe('add property', () => {
     expect(jsoncPatch('{}', { items: [] })).toBe('{"items": []}')
   })
   it('add array with mixed values', () => {
-    expect(jsoncPatch('{}', { items: [1, 'two', false, null] })).toBe('{"items": [1,"two",false,null]}')
+    expect(jsoncPatch('{}', { items: [1, 'two', false, null] })).toBe(
+      '{"items": [1,"two",false,null]}'
+    )
   })
   it('add to spaced empty object', () => {
     expect(jsoncPatch('{ }', { newKey: 'added' })).toBe('{"newKey": "added" }')
   })
   it('add to compact single property', () => {
-    expect(jsoncPatch('{"a":1}', { a: 1, newKey: 'added' })).toBe('{"a":1,"newKey": "added"}')
+    expect(jsoncPatch('{"a":1}', { a: 1, newKey: 'added' })).toBe(
+      '{"a":1,"newKey": "added"}'
+    )
   })
   it('add to two-property object', () => {
-    expect(jsoncPatch('{"a":1,"b":2}', { a: 1, b: 2, newKey: 'added' })).toBe('{"a":1,"b":2,"newKey": "added"}')
+    expect(jsoncPatch('{"a":1,"b":2}', { a: 1, b: 2, newKey: 'added' })).toBe(
+      '{"a":1,"b":2,"newKey": "added"}'
+    )
   })
 })
 
@@ -75,7 +85,9 @@ describe('replace property', () => {
     expect(jsoncPatch('{"a": {"b":1}}', { a: 99 })).toBe('{"a": 99}')
   })
   it('replace multiple properties', () => {
-    expect(jsoncPatch('{"a": 1, "b": "x", "c": true}', { a: 2, b: 'y', c: false })).toBe('{"a": 2, "b": "y", "c": false}')
+    expect(
+      jsoncPatch('{"a": 1, "b": "x", "c": true}', { a: 2, b: 'y', c: false })
+    ).toBe('{"a": 2, "b": "y", "c": false}')
   })
   it('replace same type different value', () => {
     expect(jsoncPatch('{"a": 10}', { a: 999 })).toBe('{"a": 999}')
@@ -99,7 +111,9 @@ describe('replace property', () => {
     expect(jsoncPatch('{"a":1,"b":2}', { a: 1, b: 99 })).toBe('{"a":1,"b":99}')
   })
   it('replace middle of three', () => {
-    expect(jsoncPatch('{"a":1,"b":2,"c":3}', { a: 1, b: 99, c: 3 })).toBe('{"a":1,"b":99,"c":3}')
+    expect(jsoncPatch('{"a":1,"b":2,"c":3}', { a: 1, b: 99, c: 3 })).toBe(
+      '{"a":1,"b":99,"c":3}'
+    )
   })
 })
 
@@ -108,28 +122,42 @@ describe('remove property', () => {
     expect(jsoncPatch('{"a": 1, "b": 2}', { a: 1 })).toBe('{"a": 1}')
   })
   it('remove multiple properties', () => {
-    expect(jsoncPatch('{"a": 1, "b": 2, "c": 3, "d": 4}', { b: 2, c: 3 })).toBe('{"b": 2, "c": 3}')
+    expect(jsoncPatch('{"a": 1, "b": 2, "c": 3, "d": 4}', { b: 2, c: 3 })).toBe(
+      '{"b": 2, "c": 3}'
+    )
   })
   it('remove all leaving empty object', () => {
     expect(jsoncPatch('{"a": 1, "b": 2}', {})).toBe('{}')
   })
   it('remove string value property', () => {
-    expect(jsoncPatch('{"keep": 1, "remove": "bye"}', { keep: 1 })).toBe('{"keep": 1}')
+    expect(jsoncPatch('{"keep": 1, "remove": "bye"}', { keep: 1 })).toBe(
+      '{"keep": 1}'
+    )
   })
   it('remove object value property', () => {
-    expect(jsoncPatch('{"keep": 1, "remove": {"nested": "deep"}}', { keep: 1 })).toBe('{"keep": 1}')
+    expect(
+      jsoncPatch('{"keep": 1, "remove": {"nested": "deep"}}', { keep: 1 })
+    ).toBe('{"keep": 1}')
   })
   it('remove array value property', () => {
-    expect(jsoncPatch('{"keep": 1, "remove": [1,2,3]}', { keep: 1 })).toBe('{"keep": 1}')
+    expect(jsoncPatch('{"keep": 1, "remove": [1,2,3]}', { keep: 1 })).toBe(
+      '{"keep": 1}'
+    )
   })
   it('remove null value property', () => {
-    expect(jsoncPatch('{"keep": 1, "remove": null}', { keep: 1 })).toBe('{"keep": 1}')
+    expect(jsoncPatch('{"keep": 1, "remove": null}', { keep: 1 })).toBe(
+      '{"keep": 1}'
+    )
   })
   it('remove first alphabetically', () => {
-    expect(jsoncPatch('{"a": 1, "b": 2, "c": 3}', { b: 2, c: 3 })).toBe('{"b": 2, "c": 3}')
+    expect(jsoncPatch('{"a": 1, "b": 2, "c": 3}', { b: 2, c: 3 })).toBe(
+      '{"b": 2, "c": 3}'
+    )
   })
   it('remove last alphabetically', () => {
-    expect(jsoncPatch('{"a": 1, "b": 2, "c": 3}', { a: 1, b: 2 })).toBe('{"a": 1, "b": 2}')
+    expect(jsoncPatch('{"a": 1, "b": 2, "c": 3}', { a: 1, b: 2 })).toBe(
+      '{"a": 1, "b": 2}'
+    )
   })
 })
 
@@ -138,13 +166,19 @@ describe('mixed operations', () => {
     expect(jsoncPatch('{"a": 1}', { a: 99, b: 2 })).toBe('{"a": 99,"b": 2}')
   })
   it('add and remove simultaneously', () => {
-    expect(jsoncPatch('{"a": 1, "b": 2}', { b: 2, c: 3 })).toBe('{"b": 2,"c": 3}')
+    expect(jsoncPatch('{"a": 1, "b": 2}', { b: 2, c: 3 })).toBe(
+      '{"b": 2,"c": 3}'
+    )
   })
   it('replace and remove simultaneously', () => {
-    expect(jsoncPatch('{"a": 1, "b": 2, "c": 3}', { a: 99, c: 3 })).toBe('{"a": 99, "c": 3}')
+    expect(jsoncPatch('{"a": 1, "b": 2, "c": 3}', { a: 99, c: 3 })).toBe(
+      '{"a": 99, "c": 3}'
+    )
   })
   it('add replace and remove simultaneously', () => {
-    expect(jsoncPatch('{"x": 1, "y": 2, "z": 3}', { x: 99, z: null, w: 4 })).toBe('{"x": 99, "z": null,"w": 4}')
+    expect(
+      jsoncPatch('{"x": 1, "y": 2, "z": 3}', { x: 99, z: null, w: 4 })
+    ).toBe('{"x": 99, "z": null,"w": 4}')
   })
 })
 
@@ -162,19 +196,25 @@ describe('object toggling', () => {
     expect(jsoncPatch('{"a": 1, "b": 2}', {})).toBe('{}')
   })
   it('toggle single to three', () => {
-    expect(jsoncPatch('{"a": 1}', { a: 1, b: 2, c: 3 })).toBe('{"a": 1,"c": 3,"b": 2}')
+    expect(jsoncPatch('{"a": 1}', { a: 1, b: 2, c: 3 })).toBe(
+      '{"a": 1,"c": 3,"b": 2}'
+    )
   })
   it('toggle three to single', () => {
     expect(jsoncPatch('{"a": 1, "b": 2, "c": 3}', { a: 1 })).toBe('{"a": 1}')
   })
   it('toggle reorder same values', () => {
-    expect(jsoncPatch('{"a": 1, "b": 2}', { b: 2, a: 1 })).toBe('{"a": 1, "b": 2}')
+    expect(jsoncPatch('{"a": 1, "b": 2}', { b: 2, a: 1 })).toBe(
+      '{"a": 1, "b": 2}'
+    )
   })
 })
 
 describe('value round-trips', () => {
   it('round-trip hello world', () => {
-    expect(jsoncPatch('{"a": "start"}', { a: 'hello world' })).toBe('{"a": "hello world"}')
+    expect(jsoncPatch('{"a": "start"}', { a: 'hello world' })).toBe(
+      '{"a": "hello world"}'
+    )
   })
   it('round-trip empty string', () => {
     expect(jsoncPatch('{"a": "start"}', { a: '' })).toBe('{"a": ""}')
@@ -192,25 +232,39 @@ describe('value round-trips', () => {
     expect(jsoncPatch('{"a": "start"}', { a: 'null' })).toBe('{"a": "null"}')
   })
   it('round-trip json string', () => {
-    expect(jsoncPatch('{"a": "start"}', { a: '{"a":1}' })).toBe('{"a": "{\\"a\\":1}"}')
+    expect(jsoncPatch('{"a": "start"}', { a: '{"a":1}' })).toBe(
+      '{"a": "{\\"a\\":1}"}'
+    )
   })
   it('round-trip newline string', () => {
-    expect(jsoncPatch('{"a": "start"}', { a: 'line1\nline2' })).toBe('{"a": "line1\\nline2"}')
+    expect(jsoncPatch('{"a": "start"}', { a: 'line1\nline2' })).toBe(
+      '{"a": "line1\\nline2"}'
+    )
   })
   it('round-trip tab string', () => {
-    expect(jsoncPatch('{"a": "start"}', { a: 'tab\there' })).toBe('{"a": "tab\\there"}')
+    expect(jsoncPatch('{"a": "start"}', { a: 'tab\there' })).toBe(
+      '{"a": "tab\\there"}'
+    )
   })
   it('round-trip emoji string', () => {
-    expect(jsoncPatch('{"a": "start"}', { a: 'unicode emoji \uD83C\uDF89' })).toBe('{"a": "unicode emoji 🎉"}')
+    expect(
+      jsoncPatch('{"a": "start"}', { a: 'unicode emoji \uD83C\uDF89' })
+    ).toBe('{"a": "unicode emoji 🎉"}')
   })
   it('round-trip special chars', () => {
-    expect(jsoncPatch('{"a": "start"}', { a: 'special chars: !@#$%^&*()' })).toBe('{"a": "special chars: !@#$%^&*()"}')
+    expect(
+      jsoncPatch('{"a": "start"}', { a: 'special chars: !@#$%^&*()' })
+    ).toBe('{"a": "special chars: !@#$%^&*()"}')
   })
   it('round-trip quotes string', () => {
-    expect(jsoncPatch('{"a": "start"}', { a: 'quotes: "double" and \'single\'' })).toBe('{"a": "quotes: \\"double\\" and \'single\'"}')
+    expect(
+      jsoncPatch('{"a": "start"}', { a: 'quotes: "double" and \'single\'' })
+    ).toBe('{"a": "quotes: \\"double\\" and \'single\'"}')
   })
   it('round-trip backslash string', () => {
-    expect(jsoncPatch('{"a": "start"}', { a: 'backslash: \\path\\to\\file' })).toBe('{"a": "backslash: \\\\path\\\\to\\\\file"}')
+    expect(
+      jsoncPatch('{"a": "start"}', { a: 'backslash: \\path\\to\\file' })
+    ).toBe('{"a": "backslash: \\\\path\\\\to\\\\file"}')
   })
 })
 
@@ -222,10 +276,14 @@ describe('numeric keys and values', () => {
     expect(jsoncPatch('{"a": 0}', { a: -1 })).toBe('{"a": -1}')
   })
   it('numeric large integer', () => {
-    expect(jsoncPatch('{"a": 0}', { a: 9007199254740991 })).toBe('{"a": 9007199254740991}')
+    expect(jsoncPatch('{"a": 0}', { a: 9007199254740991 })).toBe(
+      '{"a": 9007199254740991}'
+    )
   })
   it('numeric float', () => {
-    expect(jsoncPatch('{"a": 0}', { a: 3.141592653589793 })).toBe('{"a": 3.141592653589793}')
+    expect(jsoncPatch('{"a": 0}', { a: 3.141592653589793 })).toBe(
+      '{"a": 3.141592653589793}'
+    )
   })
   it('numeric negative float', () => {
     expect(jsoncPatch('{"a": 0}', { a: -2.71828 })).toBe('{"a": -2.71828}')
@@ -249,10 +307,14 @@ describe('empty and minimal', () => {
     expect(jsoncPatch('{}', { a: 1 })).toBe('{"a": 1}')
   })
   it('many to single', () => {
-    expect(jsoncPatch('{"a":1,"b":2,"c":3,"d":4,"e":5}', { a: 1 })).toBe('{"a":1}')
+    expect(jsoncPatch('{"a":1,"b":2,"c":3,"d":4,"e":5}', { a: 1 })).toBe(
+      '{"a":1}'
+    )
   })
   it('single to many', () => {
-    expect(jsoncPatch('{"a":1}', { a: 1, b: 2, c: 3, d: 4, e: 5 })).toBe('{"a":1,"e": 5,"d": 4,"c": 3,"b": 2}')
+    expect(jsoncPatch('{"a":1}', { a: 1, b: 2, c: 3, d: 4, e: 5 })).toBe(
+      '{"a":1,"e": 5,"d": 4,"c": 3,"b": 2}'
+    )
   })
 })
 
@@ -291,6 +353,8 @@ describe('multi-value type mutations', () => {
 
 describe('property order sensitivity', () => {
   it('same keys different order in input JSON', () => {
-    expect(jsoncPatch('{"b": 2, "a": 1}', { a: 99, b: 2 })).toBe('{"b": 2, "a": 99}')
+    expect(jsoncPatch('{"b": 2, "a": 1}', { a: 99, b: 2 })).toBe(
+      '{"b": 2, "a": 99}'
+    )
   })
 })
