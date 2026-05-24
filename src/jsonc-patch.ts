@@ -59,7 +59,8 @@ export function jsoncPatch<T extends object>(
   object: T,
   options?: ModificationOptions
 ): string {
-  let inputText = text || '{}'
+  let inputText = text.trim() ? text : '{}'
+
   const prevObject = parse(inputText) as T
   const patch = compare(prevObject, object)
 
