@@ -1,0 +1,3 @@
+[submodule "src/lib/jsonc-parser"]
+	path = src/lib/jsonc-parser
+	url = https://github.com/microsoft/node-jsonc-parser.git

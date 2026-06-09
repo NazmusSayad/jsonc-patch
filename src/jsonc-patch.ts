@@ -1,11 +1,11 @@
 import { compare } from 'fast-json-patch'
+import { toJsonPath } from './json-path'
 import {
   applyEdits,
   ModificationOptions,
   modify,
   parse,
-} from '../node-jsonc-parser/src/main'
-import { toJsonPath } from './json-path'
+} from './lib/jsonc-parser/src/main'
 
 /**
  * Applies object changes to a JSONC string while preserving formatting, comments,
