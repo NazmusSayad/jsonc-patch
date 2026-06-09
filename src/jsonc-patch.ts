@@ -1,5 +1,10 @@
 import { compare } from 'fast-json-patch'
-import { applyEdits, ModificationOptions, modify, parse } from 'jsonc-parser'
+import {
+  applyEdits,
+  ModificationOptions,
+  modify,
+  parse,
+} from '../node-jsonc-parser/src/main'
 import { toJsonPath } from './json-path'
 
 /**

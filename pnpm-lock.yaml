@@ -4,9 +4,6 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-patchedDependencies:
-  jsonc-parser@3.3.1: 078469c7b504a54817649f71003714dd566d52d88d5e304fb09cc6627d5b71b8
-
 importers:
 
   .:
@@ -16,7 +13,7 @@ importers:
         version: 3.1.1
       jsonc-parser:
         specifier: ^3.3.1
-        version: 3.3.1(patch_hash=078469c7b504a54817649f71003714dd566d52d88d5e304fb09cc6627d5b71b8)
+        version: 3.3.1
     devDependencies:
       '@eslint/compat':
         specifier: ^1.4.0
@@ -3253,7 +3250,7 @@ snapshots:
     dependencies:
       minimist: 1.2.8
 
-  jsonc-parser@3.3.1(patch_hash=078469c7b504a54817649f71003714dd566d52d88d5e304fb09cc6627d5b71b8): {}
+  jsonc-parser@3.3.1: {}
 
   keyv@4.5.4:
     dependencies:
