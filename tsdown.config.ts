@@ -3,17 +3,14 @@ import { defineConfig } from 'tsdown'
 import packageJSON from './package.json' with { type: 'json' }
 
 export default defineConfig({
-  entry: {
-    index: './src/index.ts',
-  },
+  entry: './src/index.ts',
 
   outDir: './dist',
   tsconfig: './tsconfig.json',
   format: ['cjs', 'es'] satisfies InternalModuleFormat[],
 
   dts: true,
-  sourcemap: true,
-
+  clean: true,
   target: 'ES6',
   minify: 'dce-only',
 
