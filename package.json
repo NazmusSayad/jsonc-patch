@@ -1,6 +1,7 @@
 {
   "name": "jsonc-patch",
   "version": "0.0.4",
+  "description": "Apply object changes to a JSON / JSONC string while preserving formatting, comments, and whitespace.",
   "sideEffects": false,
   "scripts": {
     "lint": "eslint .",
@@ -55,5 +56,26 @@
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.46.2",
     "vitest": "^4.1.7"
+  },
+  "keywords": [
+    "jsonc",
+    "json",
+    "patch",
+    "diff",
+    "json-patch",
+    "comments",
+    "formatting",
+    "jsonc-parser",
+    "fast-json-patch"
+  ],
+  "license": "MIT",
+  "author": "NazmusSayad",
+  "homepage": "https://github.com/NazmusSayad/jsonc-patch#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NazmusSayad/jsonc-patch.git"
+  },
+  "bugs": {
+    "url": "https://github.com/NazmusSayad/jsonc-patch/issues"
   }
 }
