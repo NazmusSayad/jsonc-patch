@@ -1,6 +1,6 @@
 {
   "name": "jsonc-patch",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "sideEffects": false,
   "scripts": {
     "lint": "eslint .",
@@ -8,7 +8,6 @@
     "test": "vitest run",
     "test:watch": "vitest watch",
     "tc": "tsc --noEmit --watch",
-    "exports": "tsx ./write-exports.ts",
     "build": "tsdown --config ./tsdown.config.ts",
     "dev": "concurrently --names \"R,T\" --prefix-colors \"blue.dim,magenta.dim\" \"tsdown --config ./tsdown.config.ts --watch\" \"tsc --noEmit --watch\"",
     "start": "tsx --watch ./src/index.ts"
